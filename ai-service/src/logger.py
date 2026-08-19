@@ -1,7 +1,7 @@
 INDENT_SIZE = 4
 
 
-def log(msg, indent=0):
+def log(msg, indent = 0):
   print(" " * indent * INDENT_SIZE + f"{msg}")
 
 

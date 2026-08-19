@@ -1,23 +1,19 @@
-from fastapi import FastAPI, File, Form, UploadFile
-from src.service.get_similar import get_similar
-from src.service.add_image import add_image_from_bytes
+from fastapi import FastAPI, File, UploadFile, HTTPException
+import src.service.embedding as embedding 
+import src.logger as logger, time
 
 
 app = FastAPI()
 
 
-@app.get("/")
-async def home():
-  return { "message": "Online" }
-
-
 @app.post("/embedding")
 async def create_embedding(image: UploadFile = File(...)):
+  logger.info("Creating image embedding")
+  start = time.perf_counter()
+
   img_bytes = await image.read()
-  img_id = add_image_from_bytes(img_bytes, image.filename)
-  return { "img_id": img_id }
+  img_embedding = embedding.from_image(img_bytes)
 
-
-@app.get("/similar")
-async def find_similar(id: str):
-  return get_similar(id)
+  end = time.perf_counter()
+  logger.info(f"Created [{(end - start) * 1000:.2f}ms]")
+  return { "embedding": img_embedding }

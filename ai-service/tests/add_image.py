@@ -1,4 +1,4 @@
-from src.service.add_image import *
+from src.service.embedding import *
 import src.image.loader as loader
 import os
 import src.logger as logger

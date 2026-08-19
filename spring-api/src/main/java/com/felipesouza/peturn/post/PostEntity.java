@@ -1,5 +1,6 @@
 package com.felipesouza.peturn.post;
 
+import com.felipesouza.peturn.machineLearning.ImageEntity;
 import com.felipesouza.peturn.pet.Pet;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,9 +21,9 @@ public class PostEntity {
     @Embedded
     Pet pet;
 
-    @Column(name = "title")
     String title;
-
-    @Column(name = "description")
     String description;
+
+    @OneToOne(mappedBy = "post")
+    ImageEntity image;
 }

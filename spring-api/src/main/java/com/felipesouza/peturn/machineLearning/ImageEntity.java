@@ -6,6 +6,8 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.UUID;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -17,7 +19,7 @@ import org.hibernate.type.SqlTypes;
 public class ImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     @JdbcTypeCode(SqlTypes.VECTOR)
     @Column(columnDefinition = "vector(512)")

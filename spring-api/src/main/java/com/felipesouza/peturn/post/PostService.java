@@ -1,8 +1,11 @@
 package com.felipesouza.peturn.post;
 
+import com.felipesouza.exceptions.PostNotFoundException;
 import com.felipesouza.peturn.machineLearning.MLService;
 import com.felipesouza.peturn.pet.Pet;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class PostService {
@@ -15,8 +18,9 @@ public class PostService {
         this.mlService = mlService;
     }
 
-    public void getPost() {
-
+    public PostEntity getPost(UUID postId) throws PostNotFoundException {
+        return postRepository.findById(postId)
+                .orElseThrow(PostNotFoundException::new);
     }
 
     public void createPost(CreatePostRequest request) {

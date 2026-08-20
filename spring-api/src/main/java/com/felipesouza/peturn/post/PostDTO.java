@@ -2,8 +2,10 @@ package com.felipesouza.peturn.post;
 
 import com.felipesouza.peturn.pet.Pet;
 
+import java.util.UUID;
+
 public record PostDTO(
-        String name,
+        UUID id,
         String title,
         String description,
         String imageId,

@@ -5,6 +5,8 @@ import com.felipesouza.peturn.pet.Pet;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -16,7 +18,7 @@ import lombok.*;
 public class PostEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.UUID)
-    String id;
+    UUID id;
 
     @Embedded
     Pet pet;

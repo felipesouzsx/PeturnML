@@ -36,7 +36,7 @@ public class MLService {
                 .post(post)
                 .embedding(embedding)
                 .build();
-        imageRepository.saveAndFlush(newImage);
+        imageRepository.save(newImage);
     }
 
 

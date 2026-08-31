@@ -30,7 +30,7 @@ public class PostService {
                 .title(request.title())
                 .description(request.description())
                 .build();
-        postRepository.saveAndFlush(newPost);
+        postRepository.save(newPost);
         mlService.createImage(request.petImage(), newPost);
     }
 }

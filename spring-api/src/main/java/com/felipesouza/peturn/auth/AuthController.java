@@ -1,6 +1,7 @@
 package com.felipesouza.peturn.auth;
 
 import com.felipesouza.exceptions.BadCredentialsException;
+import com.felipesouza.peturn.user.UserDTO;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -36,14 +37,16 @@ public class AuthController {
 
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request) {
+    public ResponseEntity<UserDTO> login(@Valid @RequestBody LoginRequest request) {
         log.info("Logging-in");
         try {
-            String token = authService.login(request);
+            LoginData response = authService.login(request);
+            String token = response.token();
+            UserDTO user = response.user();
             ResponseCookie cookie = createCookie("access_token", token, JwtService.EXPIRATION_TIME);
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                    .build();
+                    .body(user);
         } catch (BadCredentialsException e) {
             log.error("Bad credentials");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

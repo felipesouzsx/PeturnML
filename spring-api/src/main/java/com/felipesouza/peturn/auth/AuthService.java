@@ -1,6 +1,7 @@
 package com.felipesouza.peturn.auth;
 
 import com.felipesouza.exceptions.BadCredentialsException;
+import com.felipesouza.peturn.user.UserDTO;
 import com.felipesouza.peturn.user.UserEntity;
 import com.felipesouza.peturn.user.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,7 @@ public class AuthService {
     }
 
 
-    public String login(LoginRequest request) throws BadCredentialsException {
+    public LoginData login(LoginRequest request) throws BadCredentialsException {
         UserEntity user = userRepository.findByEmail(request.email())
                 .orElseThrow(BadCredentialsException::new);
         log.info("Found email");
@@ -51,6 +52,9 @@ public class AuthService {
         }
 
         log.info("Password matches");
-        return jwtService.generateToken(user);
+        return new LoginData(
+                jwtService.generateToken(user),
+                new UserDTO(user.getId(), user.getUsername(), user.getEmail())
+        );
     }
 }

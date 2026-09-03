@@ -1,8 +1,7 @@
 import AuthenticationError from '@/errors/authentication-error';
-import { getCookie } from './cookie-service';
 import { useAuthStore } from '@/stores/auth-store';
 import type { User } from '@/model/user';
-import { apiUrl } from '@/config/api';
+import { authenticatedFetch } from './api-service';
 
 interface RegisterRequest {
   username: string;
@@ -11,7 +10,7 @@ interface RegisterRequest {
 }
 
 export async function login(email: string, password: string) {
-  const response = await authenticatedFetch(apiUrl('/auth/login'), {
+  const response = await authenticatedFetch('/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -37,7 +36,7 @@ export async function register(username: string, email: string, password: string
     password,
   };
 
-  const response = await authenticatedFetch(apiUrl('auth/register'), {
+  const response = await authenticatedFetch('auth/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,24 +47,4 @@ export async function register(username: string, email: string, password: string
   if (!response.ok) {
     throw new AuthenticationError('Registration failed');
   }
-}
-
-function getCsrfToken(): string {
-  const token = getCookie('XSRF-TOKEN');
-  if (!token) {
-    throw new AuthenticationError('Registration failed');
-  }
-  return token;
-}
-
-async function authenticatedFetch(url: string, info: RequestInit) {
-  const csrfToken = getCsrfToken();
-  const headers = info.headers ? new Headers(info.headers) : new Headers();
-  headers.set('X-XSRF-TOKEN', csrfToken);
-
-  return fetch(url, {
-    ...info,
-    credentials: 'include',
-    headers,
-  });
 }

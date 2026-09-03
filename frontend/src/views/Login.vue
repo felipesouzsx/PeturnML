@@ -1,21 +1,17 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import router from '@/router/index.ts'
-import { useAuthStore } from '@/stores/auth-store'
 import { login } from '@/services/auth-service'
-import type { LoginResponse } from '@/model/login-response'
-const authStore = useAuthStore()
 
 const email = ref('')
 const password = ref('')
 
 async function handleLogin() {
   try {
-    const response: LoginResponse = await login(email.value, password.value)
-    authStore.setAuth(response.accessToken, response.user)
+    await login(email.value, password.value)
     router.push('/home')
   } catch (error) {
-    console.log('Error logging-in')
+    console.log(`Error logging in: ${error}`)
   }
 }
 </script>

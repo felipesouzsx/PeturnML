@@ -18,6 +18,7 @@ public interface ImageRepository extends JpaRepository<ImageEntity, UUID> {
            p.pet_name AS petName,
            p.pet_type AS petType,
            p.status AS status,
+           p.user_id as userId,
            i.id AS imageId,
            1 - (i.embedding <=> CAST(:queryEmbedding AS vector)) AS similarity
     FROM images i JOIN posts p ON p.id = i.post_id

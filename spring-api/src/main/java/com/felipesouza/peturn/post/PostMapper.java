@@ -10,6 +10,7 @@ public class PostMapper {
                 post.getTitle(),
                 post.getDescription(),
                 post.getImage().getId(),
+                post.getUser().getId(),
                 post.getStatus(),
                 post.getPet()
         );

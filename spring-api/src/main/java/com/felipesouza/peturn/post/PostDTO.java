@@ -9,6 +9,7 @@ public record PostDTO(
         String title,
         String description,
         UUID imageId,
+        UUID userID,
         PostStatus status,
         Pet pet
 ) {}

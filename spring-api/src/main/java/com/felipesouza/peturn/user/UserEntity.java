@@ -1,8 +1,11 @@
 package com.felipesouza.peturn.user;
 
+import com.felipesouza.peturn.post.PostEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,4 +29,7 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String passwordHash;
+
+    @OneToMany(mappedBy = "user")
+    private List<PostEntity> posts = new ArrayList<>();
 }

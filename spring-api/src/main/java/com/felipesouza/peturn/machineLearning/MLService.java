@@ -57,6 +57,7 @@ public class MLService {
                         similarPostProjection.getTitle(),
                         similarPostProjection.getDescription(),
                         similarPostProjection.getImageId(),
+                        similarPostProjection.getUserId(),
                         similarPostProjection.getStatus(),
                         new Pet(similarPostProjection.getPetType(), similarPostProjection.getPetName())
                 ),

@@ -1,6 +1,6 @@
 package com.felipesouza.peturn.user;
 
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,12 +22,13 @@ public class CustomUserDetailsService implements UserDetailsService {
      * da framework.
      */
     @Override
-    public UserDetails loadUserByUsername(@NonNull String email) throws UsernameNotFoundException {
+    @NullMarked
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         return User.builder()
-                .username(user.getEmail())
+                .username(user.getId().toString())
                 .password(user.getPasswordHash())
                 .authorities("USER")
                 .build();

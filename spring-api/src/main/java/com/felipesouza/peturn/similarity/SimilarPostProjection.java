@@ -12,6 +12,7 @@ public interface SimilarPostProjection {
     UUID getImageId();
     String getPetName();
     PetType getPetType();
+    UUID getUserId();
     Float getSimilarity();
     PostStatus getStatus();
 }

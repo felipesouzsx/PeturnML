@@ -11,5 +11,6 @@ public record CreatePostRequest(
    PetType petType,
    @NotBlank @Size(max = 100) String title,
    @NotNull @Size(max = 500) String description,
-   @NotNull MultipartFile petImage
+   @NotNull MultipartFile petImage,
+   PostStatus status
 ) {}

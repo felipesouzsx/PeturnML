@@ -57,6 +57,7 @@ public class MLService {
                         similarPostProjection.getTitle(),
                         similarPostProjection.getDescription(),
                         similarPostProjection.getImageId(),
+                        similarPostProjection.getStatus(),
                         new Pet(similarPostProjection.getPetType(), similarPostProjection.getPetName())
                 ),
                 similarPostProjection.getSimilarity()
@@ -78,9 +79,12 @@ public class MLService {
         }
 
         EmbeddingResponse response = restClient
-                .post().uri("/embedding")
-                .contentType(MediaType.MULTIPART_FORM_DATA).body(body)
-                .retrieve().body(EmbeddingResponse.class);
+                .post()
+                .uri("/embedding")
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(body)
+                .retrieve()
+                .body(EmbeddingResponse.class);
 
         if (
             response == null ||

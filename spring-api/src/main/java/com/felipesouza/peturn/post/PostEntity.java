@@ -23,6 +23,9 @@ public class PostEntity {
     @Embedded
     Pet pet;
 
+    @Enumerated(EnumType.STRING)
+    PostStatus status;
+
     String title;
     String description;
 

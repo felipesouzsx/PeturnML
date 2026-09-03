@@ -1,6 +1,6 @@
 import type Pet from './pet';
 
-export default interface Post {
+export default interface PostModel {
   id: string;
   title: string;
   description: string;

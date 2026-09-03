@@ -1,20 +1,20 @@
-import { computed, ref } from 'vue'
-import { defineStore } from 'pinia'
-import type { User } from '@/model/user'
+import { computed, ref } from 'vue';
+import { defineStore } from 'pinia';
+import type { UserModel } from '@/model/user-model';
 
 export const useAuthStore = defineStore('auth', () => {
-  const user = ref<User | null>(null)
+  const user = ref<UserModel | null>(null);
 
   const isAuthenticated = computed(() => {
-    return user == null
-  })
+    return user == null;
+  });
 
-  function setUser(authenticatedUser: User) {
-    user.value = authenticatedUser
+  function setUser(authenticatedUser: UserModel) {
+    user.value = authenticatedUser;
   }
 
   function logout() {
-    user.value = null
+    user.value = null;
   }
 
   return {
@@ -22,5 +22,5 @@ export const useAuthStore = defineStore('auth', () => {
     isAuthenticated,
     setUser,
     logout,
-  }
-})
+  };
+});

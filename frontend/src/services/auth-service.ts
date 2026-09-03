@@ -1,6 +1,6 @@
 import AuthenticationError from '@/errors/authentication-error';
 import { useAuthStore } from '@/stores/auth-store';
-import type { User } from '@/model/user';
+import type { UserModel } from '@/model/user-model';
 import { authenticatedFetch } from './api-service';
 
 interface RegisterRequest {
@@ -25,7 +25,7 @@ export async function login(email: string, password: string) {
   }
 
   const authStore = useAuthStore();
-  const user: User = await response.json();
+  const user: UserModel = await response.json();
   authStore.setUser(user);
 }
 
@@ -36,7 +36,7 @@ export async function register(username: string, email: string, password: string
     password,
   };
 
-  const response = await authenticatedFetch('auth/register', {
+  const response = await authenticatedFetch('/auth/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -1,29 +1,31 @@
 <script lang="ts" setup>
-import AuthenticationError from '@/errors/authentication-error'
-import { register } from '@/services/auth-service'
-import { ref } from 'vue'
+import AuthenticationError from '@/errors/authentication-error';
+import { register } from '@/services/auth-service';
+import { ref } from 'vue';
 
-const username = ref('')
-const email = ref('')
-const password = ref('')
-const confirmPassword = ref('')
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
 
 async function createAccount() {
   try {
     if (isPasswordInvalid()) {
-      throw new AuthenticationError('Invalid password')
+      throw new AuthenticationError('Invalid password');
     }
 
-    await register(username.value, email.value, password.value)
+    await register(username.value, email.value, password.value);
   } catch (error: unknown) {
     if (error instanceof AuthenticationError) {
-      console.log(`Error authenticating: ${error.message}`)
+      console.log(`Error authenticating: ${error.message}`);
+    } else {
+      console.log(error);
     }
   }
 }
 
 function isPasswordInvalid(): boolean {
-  return password.value != confirmPassword.value || password.value == ''
+  return password.value != confirmPassword.value || password.value == '';
 }
 </script>
 

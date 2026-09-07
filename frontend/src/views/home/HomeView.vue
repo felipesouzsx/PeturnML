@@ -5,15 +5,17 @@ import YourPosts from './YourPosts.vue';
 </script>
 
 <template>
-  <PetActions></PetActions>
-
   <section>
-    <h1>Your posts</h1>
-    <YourPosts></YourPosts>
-  </section>
+    <PetActions></PetActions>
 
-  <section>
-    <h1>Nearest reports</h1>
-    <OthersPosts></OthersPosts>
+    <section>
+      <h1>Your posts</h1>
+      <YourPosts></YourPosts>
+    </section>
+
+    <section>
+      <h1>Nearest reports</h1>
+      <OthersPosts></OthersPosts>
+    </section>
   </section>
 </template>

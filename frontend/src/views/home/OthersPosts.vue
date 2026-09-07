@@ -14,6 +14,6 @@ getOthersPosts(0).then((result: Array<PostModel>) => {
 
 <template>
   <ul id="posts">
-    <Post v-for="post in posts" :title="post.title" :status="post.status"></Post>
+    <Post v-for="post in posts" :title="post.title" :status="post.status" :post-id="post.id"></Post>
   </ul>
 </template>

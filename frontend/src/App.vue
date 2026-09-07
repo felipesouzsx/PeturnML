@@ -2,7 +2,7 @@
 import { onMounted } from 'vue';
 
 onMounted(async () => {
-  const response = await fetch('http://localhost:8080/auth/csrf', {
+  await fetch('http://localhost:8080/auth/csrf', {
     method: 'GET',
     credentials: 'include',
   });
@@ -12,12 +12,42 @@ onMounted(async () => {
 
 <template>
   <main>
-    <nav>
-      <RouterLink to="/">Login</RouterLink>
-      <RouterLink to="/register">Create Account</RouterLink>
-    </nav>
     <RouterView />
   </main>
 </template>
 
-<style scoped></style>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Commissioner:wght@100..900&display=swap');
+
+main {
+  --border-radius-0: 0.75rem;
+  --border-radius-1: 0.375rem;
+
+  --gap-smaller: 0.375;
+  --gap-small: 0.75rem;
+  --gap-normal: 1.5rem;
+  --gap-big: 3rem;
+
+  --color-highlight: #ffffff;
+
+  --color-primary: #000000;
+  --color-secondary: #3c3c4399;
+  --color-tertiary: #3c3c434d;
+
+  --font-size-large: 48px;
+  --font-size-big: 24px;
+  --font-size-normal: 16px;
+  --font-size-small: 7px;
+
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+
+  font-family: 'Comissioner', sans-serif;
+  color: var(--color-primary);
+}
+
+main > section {
+  width: min(90ch, calc(100% - 2rem));
+}
+</style>

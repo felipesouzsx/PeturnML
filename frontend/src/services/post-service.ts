@@ -1,11 +1,14 @@
 import { authenticatedFetch } from './api-service';
 import PostError from '@/errors/post-error';
 import type PostModel from '@/model/post-model';
-import { PostStatus } from '@/model/post-status';
+import { PostStatus } from '@/types/post-status';
 
 export async function getPosts(page: number, endpoint: string = ''): Promise<Array<PostModel>> {
   const params: URLSearchParams = new URLSearchParams({ page: page.toString() });
-  const response = await authenticatedFetch(`/posts${endpoint}`, { method: 'GET' }, params);
+  const response = await authenticatedFetch(`/posts${endpoint}`, {
+    info: { method: 'GET' },
+    params,
+  });
   if (!response.ok) {
     return [];
   }
@@ -39,8 +42,10 @@ export async function createPost(
   form.append('status', status);
 
   const response = await authenticatedFetch('/posts', {
-    method: 'POST',
-    body: form,
+    info: {
+      method: 'POST',
+      body: form,
+    },
   });
   if (!response.ok) {
     throw new PostError(`Failed to create post ${response.statusText}`);

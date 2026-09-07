@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import router from '@/router/index.ts';
-import PetForm from '../PetForm.vue';
+import PetForm from './PetForm.vue';
 import { ref } from 'vue';
-import LoadingScreen from '../LoadingScreen.vue';
-import { PostStatus } from '@/model/post-status.ts';
+import LoadingScreen from './LoadingScreen.vue';
+import { PostStatus } from '@/types/post-status.ts';
 
 const creatingPost = ref<boolean>(false);
 

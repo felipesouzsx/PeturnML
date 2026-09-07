@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HomeScreen from '@/views/home/Home.vue';
-
-import LostPet from '@/views/create-post/lost-pet/LostPet.vue';
-import FoundPet from '@/views/create-post/found-pet/FoundPet.vue';
-
-import Login from '@/views/Login.vue';
-import Register from '@/views/Register.vue';
+import LoginView from '@/views/account/LoginView.vue';
+import RegisterView from '@/views/account/RegisterView.vue';
+import HomeScreenView from '@/views/home/HomeView.vue';
+import LostPetView from '@/views/create-post/LostPetView.vue';
+import FoundPetView from '@/views/create-post/FoundPetView.vue';
+import PostView from '@/views/post/PostView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/home', component: HomeScreen },
-    { path: '/lost-pet', component: LostPet },
-    { path: '/found-pet', component: FoundPet },
-    { path: '/', component: Login },
-    { path: '/register', component: Register },
+    { path: '/', component: LoginView },
+    { path: '/register', component: RegisterView },
+    { path: '/home', component: HomeScreenView },
+    { path: '/lost-pet', component: LostPetView },
+    { path: '/found-pet', component: FoundPetView },
+    { path: '/posts/:id', component: PostView },
   ],
 });
 

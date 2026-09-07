@@ -1,0 +1,8 @@
+.secondary {
+  box-sizing: border-box;
+  border: 1px solid var(--color-tertiary);
+  width: fit-content;
+  place-self: center;
+
+  color: var(--color-secondary);
+}

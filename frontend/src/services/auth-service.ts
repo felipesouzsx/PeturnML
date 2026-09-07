@@ -11,14 +11,16 @@ interface RegisterRequest {
 
 export async function login(email: string, password: string) {
   const response = await authenticatedFetch('/auth/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+    info: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
     },
-    body: JSON.stringify({
-      email: email,
-      password: password,
-    }),
   });
   if (!response.ok) {
     throw new AuthenticationError('Bad credentials');
@@ -37,11 +39,13 @@ export async function register(username: string, email: string, password: string
   };
 
   const response = await authenticatedFetch('/auth/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+    info: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request),
     },
-    body: JSON.stringify(request),
   });
 
   if (!response.ok) {

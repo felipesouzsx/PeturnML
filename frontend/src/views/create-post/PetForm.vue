@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { apiUrl } from '@/config/api';
 import { createPost } from '@/services/post-service';
-import { PostStatus } from '@/model/post-status';
+import { PostStatus } from '@/types/post-status';
 import { ref } from 'vue';
 
 const props = defineProps<{

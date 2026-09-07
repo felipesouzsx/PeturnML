@@ -10,17 +10,18 @@ function getCsrfToken(): string {
   return token;
 }
 
-export async function authenticatedFetch(
-  url: string,
-  info: RequestInit = { method: 'GET' },
-  params: URLSearchParams | null = null,
-) {
+interface FetchOptions {
+  info?: RequestInit;
+  params?: URLSearchParams | null;
+}
+
+export async function authenticatedFetch(url: string, options: FetchOptions = {}) {
   const csrfToken = getCsrfToken();
-  const headers = info.headers ? new Headers(info.headers) : new Headers();
+  const headers = new Headers(options.info?.headers);
   headers.set('X-XSRF-TOKEN', csrfToken);
 
-  return fetch(`${apiUrl(url)}?${params ? params : ''}`, {
-    ...info,
+  return fetch(`${apiUrl(url)}?${options.params ? options.params : ''}`, {
+    ...options.info,
     credentials: 'include',
     headers,
   });

@@ -5,7 +5,7 @@ export default interface PostModel {
   id: string;
   title: string;
   description: string;
-  imageId: string;
+  imageFilename: string;
   user: UserModel;
   status: string;
   pet: Pet;

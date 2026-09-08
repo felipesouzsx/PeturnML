@@ -1,5 +1,6 @@
 package com.felipesouza.peturn.post;
 
+import com.felipesouza.peturn.user.UserMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,8 +10,8 @@ public class PostMapper {
                 post.getId(),
                 post.getTitle(),
                 post.getDescription(),
-                post.getImage().getId(),
-                post.getUser().getId(),
+                post.getImage().getFilename(),
+                UserMapper.toDTO(post.getUser()),
                 post.getStatus(),
                 post.getPet()
         );

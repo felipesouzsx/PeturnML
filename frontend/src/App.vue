@@ -23,12 +23,16 @@ main {
   --border-radius-0: 0.75rem;
   --border-radius-1: 0.375rem;
 
-  --gap-smaller: 0.375;
+  --gap-smaller: 0.375rem;
   --gap-small: 0.75rem;
   --gap-normal: 1.5rem;
   --gap-big: 3rem;
 
   --color-highlight: #ffffff;
+
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: rgba(121, 121, 129, 0.16);
+  --color-bg-tertiary: rgba(121, 121, 129, 0.08);
 
   --color-primary: #000000;
   --color-secondary: #3c3c4399;
@@ -48,6 +52,6 @@ main {
 }
 
 main > section {
-  width: min(90ch, calc(100% - 2rem));
+  width: min(70ch, calc(100% - 2rem));
 }
 </style>

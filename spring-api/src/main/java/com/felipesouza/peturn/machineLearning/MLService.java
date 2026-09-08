@@ -1,11 +1,13 @@
 package com.felipesouza.peturn.machineLearning;
 
 import com.felipesouza.exceptions.ImageEmbeddingException;
-import com.felipesouza.peturn.pet.Pet;
-import com.felipesouza.peturn.post.PostDTO;
+import com.felipesouza.peturn.image.ImageEntity;
+import com.felipesouza.peturn.image.ImageRepository;
+import com.felipesouza.peturn.image.ImageService;
 import com.felipesouza.peturn.post.PostEntity;
 import com.felipesouza.peturn.similarity.SimilarPostProjection;
 import com.felipesouza.peturn.similarity.SimilarityDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -19,24 +21,26 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MLService {
     private final ImageRepository imageRepository;
+    private final ImageService imageService;
     private final RestClient restClient;
 
 
-    public MLService(ImageRepository imageRepository, RestClient restClient) {
-        this.imageRepository = imageRepository;
-        this.restClient = restClient;
-    }
-
-
-    public void createImage(MultipartFile img, PostEntity post) {
-        float[] embedding = this.getImageEmbedding(img);
-        ImageEntity newImage = ImageEntity.builder()
-                .post(post)
-                .embedding(embedding)
-                .build();
-        imageRepository.save(newImage);
+    public void createImage(MultipartFile img, PostEntity post) throws ImageEmbeddingException {
+        try {
+            float[] embedding = this.getImageEmbedding(img);
+            ImageEntity newImage = ImageEntity.builder()
+                    .post(post)
+                    .embedding(embedding)
+                    .build();
+            String filename = imageService.saveFile(img);
+            newImage.setFilename(filename);
+            imageRepository.save(newImage);
+        } catch (IOException e) {
+            throw new ImageEmbeddingException();
+        }
     }
 
 
@@ -52,15 +56,11 @@ public class MLService {
         );
 
         return similarPosts.stream().map(similarPostProjection -> new SimilarityDTO(
-                new PostDTO(
-                        similarPostProjection.getId(),
-                        similarPostProjection.getTitle(),
-                        similarPostProjection.getDescription(),
-                        similarPostProjection.getImageId(),
-                        similarPostProjection.getUserId(),
-                        similarPostProjection.getStatus(),
-                        new Pet(similarPostProjection.getPetType(), similarPostProjection.getPetName())
-                ),
+                similarPostProjection.getId(),
+                similarPostProjection.getTitle(),
+                similarPostProjection.getDescription(),
+                similarPostProjection.getImageFilename(),
+                similarPostProjection.getStatus(),
                 similarPostProjection.getSimilarity()
         )).toList();
     }

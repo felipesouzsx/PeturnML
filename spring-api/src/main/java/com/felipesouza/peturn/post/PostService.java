@@ -1,5 +1,6 @@
 package com.felipesouza.peturn.post;
 
+import com.felipesouza.exceptions.ImageEmbeddingException;
 import com.felipesouza.exceptions.MLServiceException;
 import com.felipesouza.exceptions.PostNotFoundException;
 import com.felipesouza.exceptions.UserNotFoundException;
@@ -66,6 +67,8 @@ public class PostService {
             mlService.createImage(request.petImage(), newPost);
         } catch (ResourceAccessException | RestClientResponseException e) {
             throw new MLServiceException("ML Service couldn't be accessed");
+        } catch (ImageEmbeddingException e) {
+            throw new MLServiceException("Failed to create image embedding");
         }
     }
 }

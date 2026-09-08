@@ -1,4 +1,4 @@
-package com.felipesouza.peturn.machineLearning;
+package com.felipesouza.peturn.image;
 
 import com.felipesouza.peturn.similarity.SimilarPostProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,12 +14,11 @@ public interface ImageRepository extends JpaRepository<ImageEntity, UUID> {
     // Fiz o uso do PGVector para calcular a distância entre o embedding das imagens direto no banco, sem depender da
     // API python.
     @Query(value = """
-    SELECT p.id, p.title, p.description,
-           p.pet_name AS petName,
-           p.pet_type AS petType,
+    SELECT p.id,
+           p.title,
+           p.description,
            p.status AS status,
-           p.user_id as userId,
-           i.id AS imageId,
+           i.filename AS imageFilename,
            1 - (i.embedding <=> CAST(:queryEmbedding AS vector)) AS similarity
     FROM images i JOIN posts p ON p.id = i.post_id
     WHERE i.post_id <> :queryPostId

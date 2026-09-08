@@ -1,6 +1,6 @@
 .secondary {
   box-sizing: border-box;
-  border: 1px solid var(--color-tertiary);
+  border: 1px solid var(--color-bg-secondary);
   width: fit-content;
   place-self: center;
 

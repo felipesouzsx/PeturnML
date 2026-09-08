@@ -5,7 +5,7 @@ import YourPosts from './YourPosts.vue';
 </script>
 
 <template>
-  <section>
+  <section id="home">
     <PetActions></PetActions>
 
     <section>
@@ -19,3 +19,15 @@ import YourPosts from './YourPosts.vue';
     </section>
   </section>
 </template>
+
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+}
+
+#home {
+  gap: var(--gap-big);
+}
+</style>

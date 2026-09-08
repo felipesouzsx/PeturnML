@@ -4,7 +4,6 @@ section {
   gap: var(--gap-big);
 
   height: 100dvh;
-  width: min(60ch, calc(100% - 4rem));
 
   place-content: center;
   text-align: center;

@@ -29,9 +29,7 @@ public class SecurityConfig {
                 // Criando um cookie separado com um token CSRF do SpringSecurity
                 .csrf(CsrfConfigurer::spa)
                 .cors(Customizer.withDefaults())
-                .sessionManagement(session -> {
-                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                })
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
                             HttpMethod.POST,
@@ -40,7 +38,8 @@ public class SecurityConfig {
                     ).permitAll();
                     auth.requestMatchers(
                             HttpMethod.GET,
-                            "/auth/csrf"
+                            "/auth/csrf",
+                            "/images/**" // Para uso local
                     ).permitAll();
                     auth.anyRequest().authenticated();
                 })

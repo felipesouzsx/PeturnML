@@ -1,4 +1,4 @@
-package com.felipesouza.peturn.machineLearning;
+package com.felipesouza.peturn.image;
 
 import com.felipesouza.peturn.post.PostEntity;
 import jakarta.persistence.*;
@@ -20,6 +20,8 @@ public class ImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    private String filename;
 
     @JdbcTypeCode(SqlTypes.VECTOR)
     @Column(columnDefinition = "vector(512)")

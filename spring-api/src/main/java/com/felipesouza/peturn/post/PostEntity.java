@@ -1,6 +1,6 @@
 package com.felipesouza.peturn.post;
 
-import com.felipesouza.peturn.machineLearning.ImageEntity;
+import com.felipesouza.peturn.image.ImageEntity;
 import com.felipesouza.peturn.pet.Pet;
 import com.felipesouza.peturn.user.UserEntity;
 import jakarta.persistence.*;

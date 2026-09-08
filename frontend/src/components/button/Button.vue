@@ -6,12 +6,14 @@ const props = withDefaults(
     variant?: ButtonVariants;
     type?: 'button' | 'submit' | 'reset';
     icon?: string;
+    iconSize?: string;
     click?: () => void;
   }>(),
   {
     variant: 'primary',
     type: 'button',
     icon: '',
+    iconSize: '24px',
     click: () => {},
   },
 );
@@ -19,7 +21,7 @@ const props = withDefaults(
 
 <template>
   <button :class="variant" :type="type" @click="click">
-    <img :src="icon" alt="" />
+    <img :src="icon" alt="" :style="`width: ${iconSize}`" />
     <slot></slot>
   </button>
 </template>

@@ -6,6 +6,7 @@ import com.felipesouza.peturn.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -29,6 +30,7 @@ public class PostEntity {
 
     String title;
     String description;
+    Date creationDate;
 
     @OneToOne(mappedBy = "post")
     ImageEntity image;

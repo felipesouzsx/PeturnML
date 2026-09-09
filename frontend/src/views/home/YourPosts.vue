@@ -14,12 +14,10 @@ getYourPosts(0).then((result: Array<PostModel>) => {
 
 <template>
   <ul id="posts">
-    <Post
-      v-for="post in posts"
-      :image-filename="post.imageFilename"
-      :title="post.title"
-      :status="post.status"
-      :post-id="post.id"
-    ></Post>
+    <Post v-for="post in posts" :post="post"></Post>
   </ul>
 </template>
+
+<style scoped>
+@import url(./common.css);
+</style>

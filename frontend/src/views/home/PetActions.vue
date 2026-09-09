@@ -43,8 +43,6 @@ function handleLostPetClick() {
   flex-direction: column;
   gap: var(--gap-big);
 
-  margin-top: var(--gap-big);
-
   place-items: center;
   justify-content: center;
 }

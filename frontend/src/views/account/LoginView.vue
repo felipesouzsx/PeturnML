@@ -5,6 +5,7 @@ import { ref } from 'vue';
 import router from '@/router/index.ts';
 import { login } from '@/services/auth-service';
 import Button from '@/components/button/Button.vue';
+import TextInput from '@/components/text-input/TextInput.vue';
 
 const email = ref('');
 const password = ref('');
@@ -31,24 +32,21 @@ async function goToRegisterView() {
     </header>
 
     <form id="login" action="" method="get" @submit.prevent="handleLogin">
-      <input
-        class="text-input"
+      <TextInput
         v-model="email"
         type="email"
         name="email"
-        id="email"
-        placeholder="Email"
         autocomplete="email"
-      />
-      <input
-        class="text-input"
+        placeholder="Email"
+      ></TextInput>
+
+      <TextInput
         v-model="password"
         type="password"
         name="password"
-        id="password"
-        placeholder="Password"
         autocomplete="current-password"
-      />
+        placeholder="Password"
+      ></TextInput>
 
       <Button
         type="submit"

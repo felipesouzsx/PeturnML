@@ -28,6 +28,9 @@ main {
   --gap-normal: 1.5rem;
   --gap-big: 3rem;
 
+  --found-color: #98e76e;
+  --missing-color: #f88e84;
+
   --color-highlight: #ffffff;
 
   --color-bg-primary: #ffffff;
@@ -53,5 +56,7 @@ main {
 
 main > section {
   width: min(70ch, calc(100% - 2rem));
+  margin-bottom: var(--gap-big);
+  margin-top: var(--gap-big);
 }
 </style>

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -60,6 +61,7 @@ public class PostService {
                 .description(request.description())
                 .status(request.status())
                 .user(user)
+                .creationDate(new Date())
                 .build();
         postRepository.save(newPost);
 

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Button from '@/components/button/Button.vue';
 import LogoVertical from '@/components/logo/LogoVertical.vue';
+import TextInput from '@/components/text-input/TextInput.vue';
 import AuthenticationError from '@/errors/authentication-error';
 import router from '@/router';
 import { register } from '@/services/auth-service';
@@ -18,6 +19,7 @@ async function createAccount() {
     }
 
     await register(username.value, email.value, password.value);
+    returnToLoginView();
   } catch (error: unknown) {
     if (error instanceof AuthenticationError) {
       console.log(`Error authenticating: ${error.message}`);
@@ -44,42 +46,33 @@ function returnToLoginView() {
     </header>
 
     <form action="" method="post" @submit.prevent="createAccount">
-      <input
-        class="text-input"
+      <TextInput
         v-model="username"
         type="text"
         name="username"
-        id="username"
         placeholder="Username"
         autocomplete="username"
-      />
-      <input
-        class="text-input"
+      ></TextInput>
+      <TextInput
         v-model="email"
         type="email"
         name="email"
-        id="email"
         placeholder="Email"
         autocomplete="email"
-      />
-      <input
-        class="text-input"
+      ></TextInput>
+      <TextInput
         v-model="password"
         type="password"
         name="password"
-        id="password"
         placeholder="Password"
         autocomplete="new-password"
-      />
-      <input
-        class="text-input"
+      ></TextInput>
+      <TextInput
         v-model="confirmPassword"
         type="password"
         name="confirm_password"
-        id="confirm_password"
         placeholder="Confirm Password"
-        autocomplete="new-password"
-      />
+      ></TextInput>
       <Button type="submit" icon="/assets/person_add_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">
         Create Account
       </Button>

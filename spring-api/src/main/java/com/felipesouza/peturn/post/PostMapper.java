@@ -10,6 +10,7 @@ public class PostMapper {
                 post.getId(),
                 post.getTitle(),
                 post.getDescription(),
+                post.getCreationDate(),
                 post.getImage().getFilename(),
                 UserMapper.toDTO(post.getUser()),
                 post.getStatus(),

@@ -1,18 +1,34 @@
 <script lang="ts" setup>
 import router from '@/router';
 import Tag from '../tag/Tag.vue';
+import PetStatusTag from '../tag/PetStatusTag.vue';
+import type PostModel from '@/model/post-model.ts';
 
-const props = defineProps<{
-  title: string;
-  status: string;
-  postId: string;
-  imageFilename: string;
-}>();
+const props = withDefaults(
+  defineProps<{
+    post: PostModel;
+    highlightStatus?: boolean;
+  }>(),
+  {
+    highlightStatus: false,
+  },
+);
 
-const imgSrc: string = `${import.meta.env.VITE_API_URL}/images/${props.imageFilename}`;
+const imgSrc: string = `${import.meta.env.VITE_API_URL}/images/${props.post.imageFilename}`;
+
+const creationDate: Date = new Date(props.post.creationDate);
+const time: string = creationDate.toLocaleTimeString('pt-BR', {
+  hour: '2-digit',
+  minute: '2-digit',
+});
+const date: string = creationDate.toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: '2-digit',
+  year: '2-digit',
+});
 
 function handleClick() {
-  router.push(`/posts/${props.postId}`);
+  router.push(`/posts/${props.post.id}`);
 }
 </script>
 
@@ -20,13 +36,11 @@ function handleClick() {
   <div class="post" v-on:click="handleClick">
     <img :src="imgSrc" alt="" srcset="" />
     <div id="post-info">
-      <h1 id="post-title">{{ props.title }}</h1>
-      <span id="date-info">01/01/2026 16:32</span>
+      <h1 id="post-title">{{ props.post.title }}</h1>
+      <span id="date-info">{{ date }} {{ time }}</span>
     </div>
     <div id="info">
-      <Tag icon="/assets/search_off_24dp_8A8A8E_FILL1_wght400_GRAD0_opsz24.svg">{{
-        props.status
-      }}</Tag>
+      <PetStatusTag :status="post.status" :highlight-post-status="highlightStatus"></PetStatusTag>
       <Tag icon="/assets/map_24dp_8A8A8E_FILL1_wght400_GRAD0_opsz24.svg">Location</Tag>
     </div>
   </div>
@@ -67,6 +81,7 @@ function handleClick() {
   color: var(--color-secondary);
   text-align: right;
   width: fit-content;
+  white-space: nowrap;
 }
 #post-info > #post-title {
   font-size: var(--font-size-big);

@@ -17,20 +17,5 @@ const props = withDefaults(
 </template>
 
 <style scoped>
-.tag {
-  display: inline-flex;
-  box-sizing: border-box;
-
-  border: 1px solid var(--color-bg-secondary);
-  border-radius: var(--border-radius-1);
-  padding: var(--gap-smaller);
-  width: 100%;
-
-  place-content: center;
-  align-items: center;
-
-  gap: var(--gap-small);
-
-  color: var(--color-secondary);
-}
+@import url(./common.css);
 </style>

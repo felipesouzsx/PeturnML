@@ -6,20 +6,5 @@
 </template>
 
 <style scoped>
-.logo {
-  font-family: 'Cherry Bomb One', system-ui;
-  font-size: var(--font-size-big);
-  text-align: center;
-  cursor: default;
-  user-select: none;
-}
-
-.logo > h1 {
-  margin: 0;
-}
-
-.logo > img {
-  aspect-ratio: 1/1;
-  width: 5rem;
-}
+@import url(./common.css);
 </style>

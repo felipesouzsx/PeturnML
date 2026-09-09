@@ -28,7 +28,12 @@ const date: string = creationDate.toLocaleDateString('pt-BR', {
 });
 
 function handleClick() {
-  router.push(`/posts/${props.post.id}`);
+  router.push({
+    name: 'posts',
+    params: {
+      id: props.post.id,
+    },
+  });
 }
 </script>
 

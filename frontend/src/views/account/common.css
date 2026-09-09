@@ -3,8 +3,6 @@ section {
   flex-direction: column;
   gap: var(--gap-big);
 
-  height: 100dvh;
-
   place-content: center;
   text-align: center;
 }

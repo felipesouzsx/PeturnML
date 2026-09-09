@@ -3,11 +3,11 @@ import Button from '@/components/button/Button.vue';
 import router from '@/router';
 
 function handleFoundPetClick() {
-  router.push('/found-pet');
+  router.push({ name: 'found-pet' });
 }
 
 function handleLostPetClick() {
-  router.push('/lost-pet');
+  router.push({ name: 'lost-pet' });
 }
 </script>
 

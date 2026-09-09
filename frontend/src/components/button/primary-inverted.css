@@ -1,0 +1,4 @@
+.primary-inverted {
+  background-color: var(--color-bg-primary);
+  color: var(--color-primary);
+}

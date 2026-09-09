@@ -10,12 +10,36 @@ import PostView from '@/views/post/PostView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/', component: LoginView },
-    { path: '/register', component: RegisterView },
-    { path: '/home', component: HomeScreenView },
-    { path: '/lost-pet', component: LostPetView },
-    { path: '/found-pet', component: FoundPetView },
-    { path: '/posts/:id', component: PostView },
+    {
+      name: 'login',
+      path: '/login',
+      component: LoginView,
+    },
+    {
+      name: 'register',
+      path: '/register',
+      component: RegisterView,
+      meta: { showBackButton: true },
+    },
+    { name: 'home', path: '/', component: HomeScreenView },
+    {
+      name: 'lost-pet',
+      path: '/lost-pet',
+      component: LostPetView,
+      meta: { showBackButton: true },
+    },
+    {
+      name: 'found-pet',
+      path: '/found-pet',
+      component: FoundPetView,
+      meta: { showBackButton: true },
+    },
+    {
+      name: 'posts',
+      path: '/posts/:id',
+      component: PostView,
+      meta: { showBackButton: true },
+    },
   ],
 });
 

@@ -34,7 +34,7 @@ function isPasswordInvalid(): boolean {
 }
 
 function returnToLoginView() {
-  router.push('/');
+  router.push({ name: 'login' });
 }
 </script>
 

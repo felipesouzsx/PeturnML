@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  modelValue?: string;
-  placeholder?: string;
-  type: string;
   name: string;
-  autocomplete?: string;
-  maxLength?: string;
+  placeholder?: string;
+  maxLength: number;
+  rows: number;
+  cols: number;
 }>();
 
 const emit = defineEmits<{
@@ -14,15 +13,15 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <input
+  <textarea
     class="text-input"
-    :type="props.type"
     :name="props.name"
     :placeholder="props.placeholder"
-    :autocomplete="props.autocomplete"
     :maxlength="props.maxLength"
+    :rows="props.rows"
+    :cols="props.cols"
     @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-  />
+  ></textarea>
 </template>
 
 <style scoped>

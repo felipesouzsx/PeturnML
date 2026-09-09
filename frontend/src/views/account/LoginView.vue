@@ -13,14 +13,14 @@ const password = ref('');
 async function handleLogin() {
   try {
     await login(email.value, password.value);
-    router.push('/home');
+    router.push({ name: 'home' });
   } catch (error) {
     console.log(`Error logging in: ${error}`);
   }
 }
 
 async function goToRegisterView() {
-  router.push('/register');
+  router.push({ name: 'register' });
 }
 </script>
 

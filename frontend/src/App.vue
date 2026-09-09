@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import AppBar from './components/app-bar/AppBar.vue';
 
 onMounted(async () => {
   await fetch('http://localhost:8080/auth/csrf', {
@@ -12,6 +13,7 @@ onMounted(async () => {
 
 <template>
   <main>
+    <AppBar></AppBar>
     <RouterView />
   </main>
 </template>
@@ -20,6 +22,8 @@ onMounted(async () => {
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Commissioner:wght@100..900&display=swap');
 
 main {
+  --website-width: min(70ch, calc(100% - 2rem));
+
   --border-radius-0: 0.75rem;
   --border-radius-1: 0.375rem;
 
@@ -55,7 +59,7 @@ main {
 }
 
 main > section {
-  width: min(70ch, calc(100% - 2rem));
+  width: var(--website-width);
   margin-bottom: var(--gap-big);
   margin-top: var(--gap-big);
 }

@@ -29,6 +29,7 @@ const props = withDefaults(
 <style scoped>
 @import url(primary.css);
 @import url(secondary.css);
+@import url(primary-inverted.css);
 
 button {
   all: unset;
@@ -49,6 +50,7 @@ button:hover,
 button:focus {
   cursor: pointer;
   transform: translateY(-0.15rem);
+  box-shadow: 0px 8px 10px 1px rgba(0, 0, 0, 0.15);
   opacity: 65%;
 }
 

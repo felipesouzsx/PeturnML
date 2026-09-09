@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import Button from '@/components/button/Button.vue';
+import TextBox from '@/components/text-input/TextBox.vue';
+import TextInput from '@/components/text-input/TextInput.vue';
 import { apiUrl } from '@/config/api';
 import { createPost } from '@/services/post-service';
 import { PostStatus } from '@/types/post-status';
@@ -17,6 +20,8 @@ const petName = ref('');
 const petImage = ref<File | null>(null);
 const title = ref('');
 const description = ref('');
+
+const imageUrl = ref<string | null>(null);
 
 async function handleSubmitPost() {
   if (!petImage.value) {
@@ -38,17 +43,23 @@ async function handleSubmitPost() {
   props.onSubmitted();
 }
 
-// Takes the image from the HTML element and puts it into the ref obj
 function handleImage(event: Event) {
   const input = event.target as HTMLInputElement;
-  petImage.value = input.files?.[0] ?? null;
+  const file = input.files?.[0];
+  if (!file) return;
+  imageUrl.value = URL.createObjectURL(file);
+  petImage.value = file ?? null;
+}
+
+function handleImageChange(event: Event) {
+  const input = event.target as HTMLInputElement;
 }
 </script>
 
 <template>
   <form :action="apiUrl('/posts')" method="post" v-on:submit.prevent="handleSubmitPost">
     <label for="petType">What kind of pet is it?</label>
-    <select name="petType" v-model="petType" required="true">
+    <select id="petType" name="petType" v-model="petType" required="true">
       <option value="CAT">Cat</option>
       <option value="DOG">Dog</option>
       <option value="HAMSTER">Hamster</option>
@@ -59,18 +70,30 @@ function handleImage(event: Event) {
     </select>
 
     <label for="petName">Do they have a name?</label>
-    <input
+    <TextInput
+      id="petName"
       type="text"
       name="petName"
       :placeholder="
         props.status == PostStatus.FOUND ? `Leave blank if you don't know` : 'Type their name here'
       "
       v-model="petName"
-      maxlength="50"
-    />
+      max-length="48"
+    ></TextInput>
 
     <label for="petImage">How do they look like?</label>
+    <label
+      tabindex="0"
+      for="petImage"
+      id="pet-image-display"
+      :style="{
+        backgroundImage: imageUrl ? `url(${imageUrl})` : undefined,
+      }"
+    >
+      {{ imageUrl ? '' : 'Clique aqui para selecionar uma imagem' }}
+    </label>
     <input
+      id="petImage"
       type="file"
       name="petImage"
       @change="handleImage"
@@ -79,21 +102,96 @@ function handleImage(event: Event) {
     />
 
     <label for="title">Let's make a post about it</label>
-    <input
+    <TextInput
+      id="title"
       type="text"
-      placeholder="Title of the post"
       name="title"
+      placeholder="Title of the post"
       v-model="title"
-      maxlength="100"
-    />
-    <textarea
-      name="description"
+      max-length="48"
+    ></TextInput>
+    <TextBox
       v-model="description"
+      name="description"
       placeholder="Tell us what happened"
-      maxlength="500"
-      rows="10"
-      cols="60"
-    ></textarea>
-    <input type="submit" value="Submit" />
+      :max-length="500"
+      :rows="10"
+      :cols="10"
+    ></TextBox>
+    <Button type="submit" icon="/assets/send_24dp_FFFFFF_FILL1_wght400_GRAD0_opsz24.svg">
+      Submit
+    </Button>
   </form>
 </template>
+
+<style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+form > label {
+  margin-top: calc(var(--gap-normal) - var(--gap-small));
+}
+
+select {
+  padding: var(--gap-small);
+  border-radius: var(--border-radius-0);
+
+  border: 1px solid var(--color-tertiary);
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.15);
+}
+select:hover,
+select:focus {
+  opacity: 65%;
+  cursor: pointer;
+  transform: translateY(-0.15rem);
+  outline: none;
+  transition: 100ms;
+
+  * {
+    opacity: 75%;
+  }
+}
+select:active {
+  transform: translateY(0);
+  opacity: 100%;
+}
+
+input[type='file'] {
+  display: none;
+}
+#pet-image-display {
+  aspect-ratio: 4/3;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--border-radius-0);
+  border: 1px solid var(--color-bg-secondary);
+
+  cursor: pointer;
+
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.15);
+  transition: 100ms;
+
+  color: var(--color-secondary);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#pet-image-display:hover {
+  transform: translateY(-0.15rem);
+  box-shadow: 0px 8px 10px 1px rgba(0, 0, 0, 0.1);
+  opacity: 65%;
+}
+
+#pet-image-display:active {
+  transform: translateY(0.15rem);
+  opacity: 100%;
+}
+</style>

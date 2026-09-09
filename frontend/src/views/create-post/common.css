@@ -1,0 +1,14 @@
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: var(--gap-normal);
+
+  margin: var(--gap-big);
+  margin-top: 0;
+}
+
+header > img {
+  width: 6rem;
+}
